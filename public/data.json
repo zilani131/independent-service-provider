@@ -1,29 +1,29 @@
 [
     {
-      "name": "user1",
-      "comment": "I used the laptop . Its performance is very good. one should buy it ",
+      "name": " For working women",
+      "comment": "Basic classes on using weights and gradually building up over  4 weeks.",
       "id": 1,
       "img": "img/user1.png"
       
     },
     {
-      "name": "user2",
-      "comment": "The battery backup is good . For better battery  backup one should buy it",
+      "name": "For HomeMakers",
+      "comment": "Weights introduction and basic fitness classes for 4 weeks.",
       "id": 2,
       "img": "img/user2.png"
      
   
     },
     {
-      "name": "user3",
-      "comment": "Its Processor is very good . For portable work station one should buy it",
+      "name": "For Gentleman",
+      "comment": "Basic Package on a regular membership basis monthly",
       "id": 3,
       "img": "img/user3.png"
      
     },
     {
-      "name": "user4",
-      "comment": "Smooth user experience . One should by it ",
+      "name": "For Women",
+      "comment": "Eligible to make use of the Gym and Pool facilities. ",
       "id": 4,
       "img": "img/user4.png"
     }

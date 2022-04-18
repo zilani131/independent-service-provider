@@ -10,8 +10,8 @@ const Banner = () => {
       <Carousel fade>
         <Carousel.Item interval={1000}>
           <img
-            style={{height:"500px"}}
-            className="d-block w-100"
+            style={{maxHeight:"700px"}}
+            className="d-block w-100 "
             src={gym1}
             alt="First slide"
           />
@@ -22,8 +22,8 @@ const Banner = () => {
         </Carousel.Item>
         <Carousel.Item interval={1000}>
           <img
-            style={{height:"500px"}}
-            className="d-block w-100"
+            style={{maxHeight:"700px"}}
+            className="d-block w-100 h-25"
             src={gym2}
             alt="First slide"
           />
@@ -34,8 +34,8 @@ const Banner = () => {
         </Carousel.Item>
         <Carousel.Item interval={1000}>
           <img
-             style={{height:"500px"}}
-            className="d-block w-100"
+            style={{maxHeight:"700px"}}
+            className="d-block w-100 h-25"
             src={gym3}
             alt="First slide"
           />

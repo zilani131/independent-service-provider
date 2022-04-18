@@ -12,7 +12,7 @@ import RequiredAuth from "./RequiredAuth/RequiredAuth";
 function App() {
   return (
     <div className="App">
-      <NavBar></NavBar>
+      <NavBar ></NavBar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
