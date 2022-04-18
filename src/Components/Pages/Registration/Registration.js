@@ -1,57 +1,142 @@
-import React from 'react';
+import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
-import google from "../../../Utilities/Logo/google.png"
+import google from "../../../Utilities/Logo/google.png";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 const Registration = () => {
-    return (
-        <div className="w-75 mx-auto">
-        <Form className="w-50 mx-auto border border-3 border-dark rounded-3 py-5 px-4 my-5 shadow-lg ">
-            <h3 className='text-center'>Creat New Account</h3>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Your name</Form.Label>
-            <Form.Control type="text" placeholder="Enter name" required />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" required />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-  
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" required/>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox ">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="outline-dark" type="submit">
-            Create an Account
+  const [error, setError] = useState("");
+  const [agree, setAgree] = useState(false);
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  const confirmPwRef = useRef("");
+  const nameRef = useRef("");
+  //    sign in with google
+  const [signInWithGoogle, loading1] = useSignInWithGoogle(auth);
+  const [updateProfile, updating] = useUpdateProfile(auth);
+  const [createUserWithEmailAndPassword, user, loading] =
+    useCreateUserWithEmailAndPassword(auth);
+  const handleChecked = (e) => {
+    setAgree(!agree);
+  };
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    const displayName = nameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const confirmPw = confirmPwRef.current.value;
+    if (password.length < 6) {
+      setError("Password must have 6 character or more");
+      return;
+    }
+    if (password !== confirmPw) {
+      setError("Password don't match");
+      return;
+    }
+    updateProfile({ displayName });
+    createUserWithEmailAndPassword(email, password);
+  };
+  console.log(user);
+
+  return (
+    <div className="w-75 mx-auto">
+      <Form
+        onSubmit={handleRegistration}
+        className="w-50 mx-auto border border-3 border-dark rounded-3 py-5 px-4 my-5 shadow-lg "
+      >
+        <h3 className="text-center">Creat New Account</h3>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="fw-bold">Your name</Form.Label>
+          <Form.Control
+            ref={nameRef}
+            type="text"
+            placeholder="Enter name"
+            required
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="fw-bold">Email address</Form.Label>
+          <Form.Control
+            ref={emailRef}
+            type="email"
+            placeholder="Enter email"
+            required
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label className="fw-bold">Password</Form.Label>
+          <Form.Control
+            ref={passwordRef}
+            type="password"
+            placeholder="Password"
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label className="fw-bold">Confirm Password</Form.Label>
+          <Form.Control
+            ref={confirmPwRef}
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <h4 className="text-center text-danger">{error}</h4>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox ">
+          <Form.Check
+            onClick={handleChecked}
+            type="checkbox"
+            label="Check me out"
+          />
+        </Form.Group>
+        <Button
+          disabled={!agree}
+          type="submit"
+          className="d-block mx-auto w-50 fw-bold"
+          variant="outline-dark "
+        >
+          Create an Account
+        </Button>
+        <div>
+          <div className="d-flex align-items-center justify-content-center my-5">
+            <div
+              style={{ height: "5px" }}
+              className="w-25 bg-dark border rounded"
+            ></div>
+            <div className="mx-2">Or</div>
+            <div
+              style={{ height: "5px" }}
+              className="w-25 bg-dark border rounded"
+            ></div>
+          </div>
+        </div>
+        <div>
+          <Button onClick={() => signInWithGoogle()} className="d-block mx-auto w-50" variant="outline-dark">
+            {" "}
+            
+              <img style={{ width: "30px" }} src={google} alt="" />
+           
+           <span className="mx-1 fw-bold">Sign up with Google</span> 
           </Button>
           <div>
-            <div className="d-flex align-items-center justify-content-center my-5">
-              <div
-                style={{ height: "5px" }}
-                className="w-25 bg-dark border rounded"
-              ></div>
-              <div className="mx-2">Or</div>
-              <div
-                style={{ height: "5px" }}
-                className="w-25 bg-dark border rounded"
-              ></div>
-            </div>
+          <span className="text-center d-block my-3 fw-bold">Already have an Account? <Link className="text-decoration-none" to="/login"> Log in</Link> </span>
           </div>
-          <div>
-          <Button className="d-block mx-auto" variant="outline-dark"> <span><img style={{width:"30px"}} src={google} alt="" /></span> Sign up with Google</Button>
-  
-          </div>
-        </Form>
-      </div>
-    );
+        </div>
+      </Form>
+    </div>
+  );
 };
 
 export default Registration;
