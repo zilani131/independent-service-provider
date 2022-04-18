@@ -92,7 +92,7 @@ const Registration = () => {
             placeholder="Password"
             required
           />
-          <h4 className="text-center text-danger">{error}</h4>
+          <p className="text-center text-danger my-3 fw-bold">{error}</p>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox ">
           <Form.Check

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import google from "../../../Utilities/Logo/google.png";
 import Button from "react-bootstrap/Button";
@@ -10,24 +10,29 @@ import {
 
 import auth from "../../../firebase.init";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SpinnerLoad from "../../Shared/SpinnerLoad";
 const Login = () => {
+    // error handling
+
   // authentication
+   
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const [user1,loading2] = useAuthState(auth);
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, user, loading,error] =
     useSignInWithEmailAndPassword(auth);
   const handleLogIn = (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     signInWithEmailAndPassword(email, password);
+   
     
   };
-  const [signInWithGoogle, loading1] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, loading1,error1] = useSignInWithGoogle(auth);
   const handleGoogle=()=>{
     signInWithGoogle()
    
@@ -35,6 +40,20 @@ const Login = () => {
   if(user1){
     navigate(from,{ replace: true });
   }
+  let showError,showError1;
+ if(error)
+ {console.log(error)
+     const z=error.message;
+     showError=z.split(':');
+     console.log(showError)
+ }
+
+    
+  
+if(loading||loading1||loading2){
+    return <SpinnerLoad></SpinnerLoad>;
+}
+ 
   return (
     <div className="w-75 mx-auto">
       <Form
@@ -63,8 +82,12 @@ const Login = () => {
             placeholder="Password"
             required
           />
+          
         </Form.Group>
-
+       { showError&&<div className="text-center text-danger my-3 fw-bold">
+           {showError[1]}</div>}
+      
+        
         <Button
           className="d-block mx-auto w-50 fw-bold"
           variant="outline-dark"
