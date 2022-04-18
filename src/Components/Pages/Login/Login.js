@@ -4,6 +4,7 @@ import google from "../../../Utilities/Logo/google.png";
 import Button from "react-bootstrap/Button";
 import {
     useAuthState,
+  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -11,8 +12,10 @@ import {
 import auth from "../../../firebase.init";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SpinnerLoad from "../../Shared/SpinnerLoad";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import { async } from "@firebase/util";
 const Login = () => {
-    // error handling
 
   // authentication
    
@@ -32,6 +35,9 @@ const Login = () => {
    
     
   };
+//   password reset email
+const [sendPasswordResetEmail] = useSendPasswordResetEmail( auth);
+// sign in with google
   const [signInWithGoogle, loading1,error1] = useSignInWithGoogle(auth);
   const handleGoogle=()=>{
     signInWithGoogle()
@@ -53,7 +59,17 @@ const Login = () => {
 if(loading||loading1||loading2){
     return <SpinnerLoad></SpinnerLoad>;
 }
- 
+const resetPassword=async()=>{
+  
+    if(emailRef.current.value){
+        await sendPasswordResetEmail(emailRef.current.value);
+        toast("Sent email")
+    }
+    else{
+        toast('Please provide email')
+    }
+}
+console.log(emailRef.current.value)
   return (
     <div className="w-75 mx-auto">
       <Form
@@ -84,9 +100,12 @@ if(loading||loading1||loading2){
           />
           
         </Form.Group>
-       { showError&&<div className="text-center text-danger my-3 fw-bold">
+        { showError&&<div className="text-center text-danger my-3 fw-bold">
            {showError[1]}</div>}
-      
+        <div id="forgetPassword" className="my-1 fw-bold text-center my-2">
+            Forget password? <button className="text-decoration-none fw-bold btn btn-link" onClick={resetPassword} >Reset Password</button>
+        </div>
+        <ToastContainer />
         
         <Button
           className="d-block mx-auto w-50 fw-bold"
