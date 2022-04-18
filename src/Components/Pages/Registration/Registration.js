@@ -2,14 +2,17 @@ import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import google from "../../../Utilities/Logo/google.png";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
   useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import { async } from "@firebase/util";
 const Registration = () => {
+    const navigate=useNavigate();
   const [error, setError] = useState("");
   const [agree, setAgree] = useState(false);
   const emailRef = useRef("");
@@ -19,17 +22,21 @@ const Registration = () => {
   //    sign in with google
   const [signInWithGoogle, loading1] = useSignInWithGoogle(auth);
   const [updateProfile, updating] = useUpdateProfile(auth);
+//   create user 
   const [createUserWithEmailAndPassword, user, loading] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth,{sendEmailVerification:true});
+    // email verification
+    
   const handleChecked = (e) => {
     setAgree(!agree);
   };
-  const handleRegistration = (e) => {
+  const handleRegistration =  async(e) => {
     e.preventDefault();
-    const displayName = nameRef.current.value;
+    const name = nameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const confirmPw = confirmPwRef.current.value;
+    
     if (password.length < 6) {
       setError("Password must have 6 character or more");
       return;
@@ -38,8 +45,10 @@ const Registration = () => {
       setError("Password don't match");
       return;
     }
-    updateProfile({ displayName });
-    createUserWithEmailAndPassword(email, password);
+   
+   await createUserWithEmailAndPassword(email, password);
+   await  updateProfile({ displayName :name});
+   navigate('/home')
   };
   console.log(user);
 
