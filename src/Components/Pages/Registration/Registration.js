@@ -5,14 +5,14 @@ import Button from "react-bootstrap/Button";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   useCreateUserWithEmailAndPassword,
-  useSendEmailVerification,
+
   useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
-import { async } from "@firebase/util";
+
 const Registration = () => {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [agree, setAgree] = useState(false);
   const emailRef = useRef("");
@@ -22,21 +22,22 @@ const Registration = () => {
   //    sign in with google
   const [signInWithGoogle, loading1] = useSignInWithGoogle(auth);
   const [updateProfile, updating] = useUpdateProfile(auth);
-//   create user 
+  //   create user
   const [createUserWithEmailAndPassword, user, loading] =
-    useCreateUserWithEmailAndPassword(auth,{sendEmailVerification:true});
-    // email verification
-    
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  // email verification
+
   const handleChecked = (e) => {
     setAgree(!agree);
   };
-  const handleRegistration =  async(e) => {
+  // registration handle
+  const handleRegistration = async (e) => {
     e.preventDefault();
     const name = nameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const confirmPw = confirmPwRef.current.value;
-    
+
     if (password.length < 6) {
       setError("Password must have 6 character or more");
       return;
@@ -45,15 +46,17 @@ const Registration = () => {
       setError("Password don't match");
       return;
     }
-   
-   await createUserWithEmailAndPassword(email, password);
-   await  updateProfile({ displayName :name});
-   navigate('/home')
+
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: name });
+    // When sign up navigate the page to home page
+    navigate("/home");
   };
   console.log(user);
 
   return (
-    <div style={{marginTop:'100px'}} className="w-75 mx-auto">
+    <div style={{ marginTop: "100px" }} className="w-75 mx-auto">
+      {/* React-bootstrap form */}
       <Form
         onSubmit={handleRegistration}
         className="formWidth mx-auto border border-3 border-dark rounded-3 py-5 px-4 my-5 shadow-lg "
@@ -132,15 +135,24 @@ const Registration = () => {
           </div>
         </div>
         <div>
-          <Button onClick={() => signInWithGoogle()} className="d-block mx-auto w-50" variant="outline-dark">
+          {/* Google sign up method */}
+          <Button
+            onClick={() => signInWithGoogle()}
+            className="d-block mx-auto w-50"
+            variant="outline-dark"
+          >
             {" "}
-            
-              <img style={{ width: "30px" }} src={google} alt="" />
-           
-           <span className="mx-1 fw-bold">Sign up with Google</span> 
+            <img style={{ width: "30px" }} src={google} alt="" />
+            <span className="mx-1 fw-bold">Sign up with Google</span>
           </Button>
           <div>
-          <span className="text-center d-block my-3 fw-bold">Already have an Account? <Link className="text-decoration-none" to="/login"> Log in</Link> </span>
+            <span className="text-center d-block my-3 fw-bold">
+              Already have an Account?{" "}
+              <Link className="text-decoration-none" to="/login">
+                {" "}
+                Log in
+              </Link>{" "}
+            </span>
           </div>
         </div>
       </Form>

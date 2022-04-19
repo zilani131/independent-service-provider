@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import google from "../../../Utilities/Logo/google.png";
 import Button from "react-bootstrap/Button";
 import {
-    useAuthState,
+  useAuthState,
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
@@ -12,67 +12,60 @@ import {
 import auth from "../../../firebase.init";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SpinnerLoad from "../../Shared/SpinnerLoad";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
-import { async } from "@firebase/util";
-import './Login.css'
-const Login = () => {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+import "./Login.css";
+const Login = () => {
   // authentication
-   
+
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
   const emailRef = useRef("");
   const passwordRef = useRef("");
-  const [user1,loading2] = useAuthState(auth);
-  const [signInWithEmailAndPassword, user, loading,error] =
+  const [user1, loading2] = useAuthState(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const handleLogIn = (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     signInWithEmailAndPassword(email, password);
-   
-    
   };
-//   password reset email
-const [sendPasswordResetEmail] = useSendPasswordResetEmail( auth);
-// sign in with google
-  const [signInWithGoogle, loading1,error1] = useSignInWithGoogle(auth);
-  const handleGoogle=()=>{
-    signInWithGoogle()
-   
+  //   password reset email
+  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+  // sign in with google
+  const [signInWithGoogle, loading1,] = useSignInWithGoogle(auth);
+  const handleGoogle = () => {
+    signInWithGoogle();
+  };
+  if (user1) {
+    navigate(from, { replace: true });
   }
-  if(user1){
-    navigate(from,{ replace: true });
+  let showError;
+  if (error) {
+    console.log(error);
+    const z = error.message;
+    showError = z.split(":");
+    console.log(showError);
   }
-  let showError,showError1;
- if(error)
- {console.log(error)
-     const z=error.message;
-     showError=z.split(':');
-     console.log(showError)
- }
-
-    
-  
-if(loading||loading1||loading2){
+// loading spinner
+  if (loading || loading1 || loading2) {
     return <SpinnerLoad></SpinnerLoad>;
-}
-const resetPassword=async()=>{
-  
-    if(emailRef.current.value){
-        await sendPasswordResetEmail(emailRef.current.value);
-        toast("Sent email")
+  }
+  // reset password email
+  const resetPassword = async () => {
+    if (emailRef.current.value) {
+      await sendPasswordResetEmail(emailRef.current.value);
+      toast("Sent email");
+    } else {
+      toast("Please provide email");
     }
-    else{
-        toast('Please provide email')
-    }
-}
-console.log(emailRef.current.value)
+  };
+
   return (
-    <div style={{marginTop:'100px'}} className="w-75 mx-auto">
+    <div style={{ marginTop: "100px" }} className="w-75 mx-auto">
       <Form
         onSubmit={handleLogIn}
         className="formWidth mx-auto border border-3 border-dark rounded-3 py-5 px-4 my-5 shadow-lg "
@@ -99,15 +92,24 @@ console.log(emailRef.current.value)
             placeholder="Password"
             required
           />
-          
         </Form.Group>
-        { showError&&<div className="text-center text-danger my-3 fw-bold">
-           {showError[1]}</div>}
+        {/* conditional rendering to show the error */}
+        {showError && (
+          <div className="text-center text-danger my-3 fw-bold">
+            {showError[1]}
+          </div>
+        )}
         <div id="forgetPassword" className="my-1 fw-bold text-center my-2">
-            Forget password? <button className="text-decoration-none fw-bold btn btn-link" onClick={resetPassword} >Reset Password</button>
+          Forget password?{" "}
+          <button
+            className="text-decoration-none fw-bold btn btn-link"
+            onClick={resetPassword}
+          >
+            Reset Password
+          </button>
         </div>
         <ToastContainer />
-        
+
         <Button
           className="d-block mx-auto w-50 fw-bold"
           variant="outline-dark"

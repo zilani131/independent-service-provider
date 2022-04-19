@@ -27,7 +27,7 @@
     }
     .mapContainer{
         width: 100%;
-        margin: 20px auto;
+       margin-bottom: 0px;
     }
     .mapImg{
         width: 100vw;

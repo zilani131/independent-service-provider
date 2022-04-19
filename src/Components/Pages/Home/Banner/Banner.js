@@ -7,6 +7,7 @@ import gym3 from "../../../../Utilities/BannerImage/gym3.png"
 const Banner = () => {
   return (
     <div>
+      {/* React-Bootstrap carousel */}
       <Carousel fade>
         <Carousel.Item interval={1000}>
           <img
