@@ -16,8 +16,8 @@ const Banner = () => {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>Don’t limit your challenges. Challenge your limits</h3>
+           
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={1000}>
@@ -28,8 +28,8 @@ const Banner = () => {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>The body achieves what the mind believes.</h3>
+         
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={1000}>
@@ -40,8 +40,8 @@ const Banner = () => {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>Good things come to those who sweat.</h3>
+       
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

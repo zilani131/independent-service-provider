@@ -7,8 +7,10 @@ import AboutMe from "./Components/Pages/AboutMe/AboutMe";
 import Blog from "./Components/Pages/Blog/Blog";
 import Registration from "./Components/Pages/Registration/Registration";
 import Page404 from "./Components/Pages/Page404/Page404";
-import ServiceDetails from "./Components/Pages/ServiceDetails/ServiceDetails";
+
 import RequiredAuth from "./RequiredAuth/RequiredAuth";
+
+import CheckOut from "./Components/Pages/CheckOut/CheckOut";
 function App() {
   return (
     <div className="App">
@@ -22,18 +24,16 @@ function App() {
           element={<Registration></Registration>}
         ></Route>
         <Route path="/blog" element={<Blog></Blog>}></Route>
-        <Route path="/aboutme" element={<AboutMe></AboutMe>}></Route>
+        <Route path="/about" element={<AboutMe></AboutMe>}></Route>
         <Route
-          path="/service/:serviceId"
+          path='/checkout/:serviceId'
           element={
-            <RequiredAuth>
-              <ServiceDetails></ServiceDetails>
-            </RequiredAuth>
+        <RequiredAuth ><CheckOut></CheckOut></RequiredAuth>  
           }
         ></Route>
         <Route path="*" element={<Page404></Page404>}></Route>
       </Routes>
-      <Footer></Footer>
+    <Footer></Footer>
     </div>
   );
 }

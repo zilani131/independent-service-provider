@@ -1,0 +1,37 @@
+.aboutImage {
+  width: 50vw;
+  margin: 0px;
+}
+.aboutContent {
+  width: 50vw;
+  margin: 0px;
+}
+.content-title {
+  max-width: 800px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  
+}
+.content-detail {
+  max-width: 800px;
+  margin-left: 20px;
+}
+@media only screen and (max-width: 720px) {
+  .aboutImage {
+    width: 100vw;
+  }
+  .aboutContent {
+    width: 100vw;
+  }
+  .content-title {
+    max-width:70vw;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .content-detail {
+    max-width: 90vw;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+}

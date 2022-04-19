@@ -2,13 +2,13 @@ import Button from 'react-bootstrap/Button'
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Service = ({ service }) => {
     const navigate=useNavigate();
   const { name,img,comment,id} = service;
   const handleCheckOut=(id)=>{
-      navigate(`/service/${id}`)
+      navigate(`/checkout/${id}`)
   }
   return (
       <Col>
@@ -19,7 +19,7 @@ const Service = ({ service }) => {
         <Card.Text>
           {comment}
         </Card.Text>
-        <Button onClick={ ()=>handleCheckOut(id)} variant="outline-dark">Check out</Button>
+       <Button onClick={()=>handleCheckOut(id)} variant="outline-dark">Check out</Button>
       </Card.Body>
     </Card>
     </Col>

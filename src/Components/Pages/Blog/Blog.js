@@ -2,31 +2,37 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div>
-      <h1>Difference between authorization and authentication</h1>
-      <p>
-        Authentication is the process of verifying who a user is and
-        authorization is the process of verifying what they have access to
+    <div className="w-50 mx-auto my-5">
+      <h4 style={{marginTop:'100px'}}>Difference between authorization and authentication</h4>
+      <p style={{fontWeight:"600",fontSize:"20px"}}>
+        Authentication is the method of identifying who a user is <br />
+        Authorization tells the user what they have access to
       </p>
-      <h1>
+      <h4>
         Why are you using firebase? What other options do you have to implement
         authentication?
-      </h1>
-      <p>
-        Firebase Authentication makes it easier to get ones users signed-in
-        without having to understand the complexities behind implementing ones
-        own authentication system . so it is easy to use firebase.
+      </h4>
+      <p style={{fontWeight:"600",fontSize:"20px"}}>
+        Firebase Authentication make it easier to set up authentication system without knowing the complexity of code .
+        So it is easy to use firebase.
+        Other options to implement authentication is.
+        <ul style={{fontWeight:"600",fontSize:"20px"}}>
+          <li>Password based Authentication </li>
+          <li>Biometric Authentication</li>
+          <li>Token Based Authentication</li>
+        </ul>
       </p>
-      <h1>What other services does firebase provide other than authentication</h1>
+      <h4>What other services does firebase provide other than authentication</h4>
       <p>
-      Cloud Firestore.
-Cloud Functions.
-Authentication.
-Hosting.
-Cloud Storage.
-Google Analytics.
-Predictions.
-Cloud Messaging.
+       <ul style={{fontWeight:"600",fontSize:"20px"}}>
+          <li> Cloud Firestore.</li>
+          <li>Cloud Functions.</li>
+          <li>Hosting.</li>
+          <li>Cloud Storage.</li>
+          <li>Google Analytics.</li>
+          <li>Predictions.</li>
+          <li>Cloud Messaging.</li>
+        </ul>
       </p>
     </div>
   );

@@ -15,6 +15,7 @@ import SpinnerLoad from "../../Shared/SpinnerLoad";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { async } from "@firebase/util";
+import './Login.css'
 const Login = () => {
 
   // authentication
@@ -71,10 +72,10 @@ const resetPassword=async()=>{
 }
 console.log(emailRef.current.value)
   return (
-    <div className="w-75 mx-auto">
+    <div style={{marginTop:'100px'}} className="w-75 mx-auto">
       <Form
         onSubmit={handleLogIn}
-        className="w-50 mx-auto border border-3 border-dark rounded-3 py-5 px-4 my-5 shadow-lg "
+        className="formWidth mx-auto border border-3 border-dark rounded-3 py-5 px-4 my-5 shadow-lg "
       >
         <h3 className="text-center">Log in</h3>
         <Form.Group className="mb-3" controlId="formBasicEmail">

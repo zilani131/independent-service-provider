@@ -11,10 +11,10 @@ const NavBar = () => {
   const [user, loading, error] = useAuthState(auth);
   
   return (
-    <div>
-      <Navbar fixed="top"  collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <div style={{marginBottom:'50px',maxWidth:'100vw'}}>
+      <Navbar  fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Gym trainer</Navbar.Brand>
+          <Navbar.Brand href="#home">Alxander Method</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav variant="white" defaultActiveKey="/home" className="ms-auto">          
@@ -23,7 +23,7 @@ const NavBar = () => {
                <Nav.Link eventKey="link-2" as={Link} to='/login'>Log In</Nav.Link> }      
           
               <Nav.Link eventKey="link-4" as={Link} to='/blog'>Blogs</Nav.Link>
-              <Nav.Link eventKey="link-5" as={Link} to='/aboutme'>About Me</Nav.Link>
+              <Nav.Link eventKey="link-5" as={Link} to='/about'>About Me</Nav.Link>
             </Nav>
            
           </Navbar.Collapse>
