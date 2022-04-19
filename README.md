@@ -1,8 +1,23 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## Website name: [Alexander Method](https://independent-service-prov-1dd05.web.app/)
+## Git hub Link:https://github.com/programming-hero-web-course-4/independent-service-provider-zilani131
 ## Available Scripts
+### Website Functionality and Feature
+* #### Home page
+* #### Responsive nav bar
+* #### Login page
+* #### Registration page
+* #### Reset password functionality 
+* #### Authentication method
+* #### Responsive website
+### Technology
+* #### React router
+* #### React Bootstrap
+* #### Firebase hooks
+* #### Hero icon
+
 
 In the project directory, you can run:
 
