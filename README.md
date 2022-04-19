@@ -12,6 +12,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * #### Reset password functionality 
 * #### Authentication method
 * #### Responsive website
+* #### Sign in and Sign up with google Functionality 
+* #### Email and password verification
 ### Technology
 * #### React router
 * #### React Bootstrap
